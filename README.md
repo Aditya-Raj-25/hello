@@ -16,8 +16,6 @@ A machine learning system for detecting, scoring, and explaining fraudulent retu
 - [Dashboard Metrics](#dashboard-metrics)
 - [User Risk Categorization](#user-risk-categorization)
 - [Logs and Monitoring](#logs-and-monitoring)
-- [Why This Project](#why-this-project)
-- [Future Enhancements](#future-enhancements)
 - [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
 
@@ -471,33 +469,6 @@ The Medium band exists specifically to prevent direct auto-blocking of borderlin
 | Admin login | Admin ID, IP address, timestamp |
 
 Logs serve as an audit trail for compliance, model accountability, and fraud dispute resolution.
-
----
-
-## Why This Project
-
-| Aspect | Detail |
-|---|---|
-| Hybrid Detection | Combines rule-free anomaly detection with optional supervised classification |
-| Explainable AI | Every score includes a human-readable factor breakdown via SHAP |
-| Sensitivity Control | Threshold slider allows operational tuning without re-training |
-| Behavioral Focus | Features derived from behavioral patterns, not just transaction values |
-| Fairness by Design | Medium band prevents over-flagging; explainability enables appeals |
-| Enterprise Structure | Modular, layered architecture ready for production extension |
-| No Black Box | Every flagged user can be audited end-to-end through logs and SHAP output |
-
----
-
-## Future Enhancements
-
-| Enhancement | Description |
-|---|---|
-| Real-Time Streaming | Kafka-based event stream for live fraud detection |
-| Graph-Based Detection | Graph neural networks to detect fraud rings and collusive networks |
-| Deep Learning | LSTM sequence models for temporal behavioral pattern detection |
-| Auto-Threshold Optimization | Bayesian or RL-based dynamic threshold tuning |
-| Federated Detection | Cross-merchant fraud signal sharing without data exposure |
-| Explainability UI | Interactive SHAP waterfall plots directly in the dashboard |
 
 ---
 
