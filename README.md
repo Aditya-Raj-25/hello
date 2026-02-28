@@ -68,7 +68,7 @@ This system combines **Isolation Forest anomaly detection**, **behavioral featur
 ```
 +---------------------------------------------------------------+
 |                         FRONTEND                              |
-|  React Dashboard                                              |
+|  Streamlit Dashboard (Python)                                 |
 |  - Risk Overview Panel     - Heatmap Visualization           |
 |  - User Search Panel       - Behavioral Timeline             |
 |  - Risk Breakdown Charts   - Logs View                       |
@@ -121,7 +121,7 @@ This system combines **Isolation Forest anomaly detection**, **behavioral featur
 
 ```
 User Action
-  --> React Frontend
+  --> Streamlit Frontend (Python)
     --> FastAPI Backend  (auth + routing)
       --> ML Engine      (feature engineering + scoring)
         --> PostgreSQL   (persist results)
@@ -313,7 +313,8 @@ erDiagram
 
 ```
 +---------------------+
-|      Frontend       |
+| Streamlit Frontend  |
+| (Python)            |
 |---------------------|
 | Dashboard Pages     |
 | Chart Components    |
@@ -324,7 +325,8 @@ erDiagram
            | HTTP REST (JSON)
            |
 +----------v----------+
-|    Backend API      |
+|  FastAPI Backend    |
+|  (Python)           |
 |---------------------|
 | Upload Controller   |
 | User Controller     |
@@ -415,7 +417,7 @@ erDiagram
            |
            v
 +----------+-----------+
-|  Dashboard Render    |  <- API serves results to React frontend
+|  Dashboard Render    |  <- Streamlit frontend renders updated dashboard
 +----------------------+
 ```
 
@@ -503,7 +505,7 @@ Logs serve as an audit trail for compliance, model accountability, and fraud dis
 
 | Layer | Technology |
 |---|---|
-| Frontend | React, Recharts, Leaflet |
+| Frontend | Python, Streamlit, Plotly, Folium |
 | Backend | Python, FastAPI |
 | ML | scikit-learn, SHAP, pandas, numpy |
 | Database | PostgreSQL |
@@ -516,24 +518,30 @@ Logs serve as an audit trail for compliance, model accountability, and fraud dis
 
 ```
 fraud-detection-dashboard/
-|-- frontend/
-|   |-- src/
-|   |   |-- components/       # RiskOverview, UserSearch, Heatmap, etc.
-|   |   |-- pages/            # Dashboard, Investigate
-|   |   |-- App.jsx
-|   |-- package.json
+|-- dashboard/                     # Streamlit frontend (Python)
+|   |-- app.py                     # Main Streamlit entry point
+|   |-- pages/
+|   |   |-- overview.py            # Risk overview and metrics
+|   |   |-- investigate.py         # User investigation panel
+|   |   |-- heatmap.py             # Behavioral heatmap
+|   |   |-- logs.py                # Audit logs view
+|   |-- components/
+|   |   |-- risk_chart.py          # Plotly risk breakdown chart
+|   |   |-- user_search.py         # Search widget
+|   |   |-- threshold_slider.py    # Sensitivity control
+|   |-- requirements.txt
 |
-|-- backend/
-|   |-- main.py               # FastAPI entry point
-|   |-- routers/              # upload, users, scores, explain, logs
-|   |-- services/             # risk_service, auth, logger
-|   |-- ml/                   # feature_engineering, model, scorer, explainer
-|   |-- models/               # schemas, db connection
+|-- api/                           # FastAPI backend (Python)
+|   |-- main.py                    # FastAPI entry point
+|   |-- routers/                   # upload, users, scores, explain, logs
+|   |-- services/                  # risk_service, auth, logger
+|   |-- ml/                        # feature_engineering, model, scorer, explainer
+|   |-- models/                    # schemas, db connection
 |   |-- requirements.txt
 |
 |-- data/
-|   |-- raw/                  # Uploaded CSVs
-|   |-- processed/            # Feature vectors
+|   |-- raw/                       # Uploaded CSVs
+|   |-- processed/                 # Feature vectors
 |
 |-- docker-compose.yml
 |-- README.md
